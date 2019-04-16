@@ -1824,9 +1824,65 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {
+      gasto: {}
+    };
+  },
+  methods: {
+    addGasto: function addGasto() {
+      var _this = this;
+
+      var uri = 'http://www.gestor.com/api/gasto/create';
+      axios.post(uri, this.gasto).then(function (response) {
+        _this.$router.push({
+          name: 'gastos'
+        });
+      });
+    }
   }
 });
 
@@ -37957,22 +38013,192 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "card card-default" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._v("Agregar Nuevo Gasto")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.addGasto()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "form-group row" }, [
+                _c("label", { staticClass: "col-sm-2 col-form-label" }, [
+                  _vm._v("Gasto")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-8" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.gasto.nombre,
+                        expression: "gasto.nombre"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      placeholder: "Nombre del gasto",
+                      required: ""
+                    },
+                    domProps: { value: _vm.gasto.nombre },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.gasto, "nombre", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c("label", { staticClass: "col-sm-2 col-form-label" }, [
+                  _vm._v("Tipo")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-8" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.gasto.tipo,
+                          expression: "gasto.tipo"
+                        }
+                      ],
+                      staticClass: "custom-select",
+                      attrs: { required: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.gasto,
+                            "tipo",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { selected: "", value: "" } }, [
+                        _vm._v("Seleccione una opción")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "fijo" } }, [
+                        _vm._v("Fijo")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "variable" } }, [
+                        _vm._v("Variable")
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c("label", { staticClass: "col-sm-2 col-form-label" }, [
+                  _vm._v("Monto")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-8" }, [
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.gasto.monto,
+                          expression: "gasto.monto"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        "aria-label":
+                          "Dollar amount (with dot and two decimal places)",
+                        placeholder: "0.00",
+                        step: "0.01",
+                        required: ""
+                      },
+                      domProps: { value: _vm.gasto.monto },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.gasto, "monto", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm._m(0)
+                  ]),
+                  _vm._v(" "),
+                  _c("small", { staticClass: "form-text text-muted" }, [
+                    _vm._v(
+                      " \n\t\t\t                Ingrese números sólos separados por punto decimal. Ejemplo 1234.05\n\t\t\t                "
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
+            ]
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("Agregar Gasto")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v("\n\t\t\t\tCreate Component\n\t\t\t")
-          ])
-        ])
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("$")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("0.00")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c("div", { staticClass: "col-sm-8" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Guardar")]
+        )
       ])
     ])
   }
