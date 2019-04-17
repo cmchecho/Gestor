@@ -20,4 +20,16 @@ class GastoController extends Controller
 
     	return response()->json('successfully added');
     }
+
+    public function index()
+    {
+        return new GastoCollection(Gasto::all());
+    }
+
+    public function delete($id)
+    {
+        $gasto = Gasto::find($id);
+        $gasto->delete();
+        return response()->json('successfully deleted');
+    }
 }

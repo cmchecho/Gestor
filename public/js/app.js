@@ -1979,9 +1979,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {
+      gastos: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var uri = 'http://www.gestor.com/api/gastos';
+    axios.get(uri).then(function (response) {
+      _this.gastos = response.data.data;
+    });
   }
 });
 
@@ -38306,22 +38350,95 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-md-10" }, [
+      _c("div", { staticClass: "card card-default" }, [
+        _c("div", { staticClass: "card-header" }, [_vm._v("Gastos")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", [
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                { staticClass: "col-md-8" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { to: { name: "create" } }
+                    },
+                    [_vm._v("Agregar Nuevo Gasto")]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("table", { staticClass: "table table-hover" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.gastos, function(gasto) {
+                  return _c("tr", { key: gasto.id }, [
+                    _c("td", [_vm._v(_vm._s(gasto.id))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(gasto.nombre))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(gasto.tipo))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(gasto.monto))]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: {
+                              to: { name: "edit", params: { id: gasto.id } }
+                            }
+                          },
+                          [_vm._v("Modificar")]
+                        ),
+                        _vm._v(" "),
+                        _c("button", { staticClass: "btn btn-danger" }, [
+                          _vm._v("Eliminar")
+                        ])
+                      ],
+                      1
+                    )
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("Index Componet")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v("\n\t\t\t\tIndex Component\n\t\t\t")
-          ])
-        ])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tipo")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Monto")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Acción")])
       ])
     ])
   }
