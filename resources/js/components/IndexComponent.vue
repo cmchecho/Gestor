@@ -29,13 +29,13 @@
             </tr>
             </thead>
             <tbody>
-                <tr v-for="gasto in gastos" :key="gasto.id">
+                <tr v-for="(gasto, index) in gastos">
                     <td>{{ gasto.id }}</td>
                     <td>{{ gasto.nombre }}</td>
                     <td>{{ gasto.tipo }}</td>
-                    <td>{{ gasto.monto }}</td>
+                    <td><span class="input-group-text">$ {{ gasto.monto }}</span></td>
                     <td><router-link :to="{name: 'edit', params: { id: gasto.id }}" class="btn btn-primary">Modificar</router-link>
-                    <button class="btn btn-danger">Eliminar</button>
+                    <button class="btn btn-danger" v-on:click.prevent="deleteGasto(index, gasto.id)">Eliminar</button>
                     </td>
                 </tr>
             </tbody>
@@ -61,5 +61,13 @@
         this.gastos = response.data.data;
       });
     },
+    methods: {
+      deleteGasto: function(index, id){
+        let uri = 'http://www.gestor.com/api/gasto/delete/' + id;
+        axios.delete(uri).then(response =>{
+          this.gastos.splice(index, 1);          
+        });
+      }
+    }
 }
 </script>

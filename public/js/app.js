@@ -2026,6 +2026,16 @@ __webpack_require__.r(__webpack_exports__);
     axios.get(uri).then(function (response) {
       _this.gastos = response.data.data;
     });
+  },
+  methods: {
+    deleteGasto: function deleteGasto(index, id) {
+      var _this2 = this;
+
+      var uri = 'http://www.gestor.com/api/gasto/delete/' + id;
+      axios["delete"](uri).then(function (response) {
+        _this2.gastos.splice(index, 1);
+      });
+    }
   }
 });
 
@@ -38382,15 +38392,19 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.gastos, function(gasto) {
-                  return _c("tr", { key: gasto.id }, [
+                _vm._l(_vm.gastos, function(gasto, index) {
+                  return _c("tr", [
                     _c("td", [_vm._v(_vm._s(gasto.id))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(gasto.nombre))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(gasto.tipo))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(gasto.monto))]),
+                    _c("td", [
+                      _c("span", { staticClass: "input-group-text" }, [
+                        _vm._v("$ " + _vm._s(gasto.monto))
+                      ])
+                    ]),
                     _vm._v(" "),
                     _c(
                       "td",
@@ -38406,9 +38420,19 @@ var render = function() {
                           [_vm._v("Modificar")]
                         ),
                         _vm._v(" "),
-                        _c("button", { staticClass: "btn btn-danger" }, [
-                          _vm._v("Eliminar")
-                        ])
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.deleteGasto(index, gasto.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Eliminar")]
+                        )
                       ],
                       1
                     )
