@@ -4,10 +4,52 @@
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 			<div class="card card-default">
-				<div class="card-header">Edit Componet</div>
+				<div class="card-header">Editar gasto Nº {{ gasto.id }}</div>
 
 				<div class="card-body">
-					Edit Component
+					
+				<form @submit.prevent="updateGasto">
+				    <div class="form-group row">
+				        <label class="col-sm-2 col-form-label">Gasto</label>
+				            <div class="col-sm-8">
+				                <input type="text" class="form-control" v-model="gasto.nombre" placeholder="Nombre del gasto" required>
+				            </div>
+				    </div>
+
+				    <div class="form-group row">
+				        <label class="col-sm-2 col-form-label">Tipo</label>
+				            <div class="col-sm-8">
+				                <select class="custom-select" v-model="gasto.tipo" required>
+				                    <option selected value="">Seleccione una opción</option>
+				                    <option value="fijo">Fijo</option>
+				                    <option value="variable">Variable</option>
+				                </select>
+				            </div>
+				    </div>
+
+				    <div class="form-group row">
+				        <label class="col-sm-2 col-form-label">Monto</label> 
+				            <div class="col-sm-8">
+				                <div class="input-group">
+				                    <input type="number" class="form-control" v-model="gasto.monto" aria-label="Dollar amount (with dot and two decimal places)" placeholder="0.00" step="0.01" required>
+				                        <div class="input-group-append">
+				                            <span class="input-group-text">$</span>
+				                            <span class="input-group-text">0.00</span>
+				                        </div>
+				                </div>
+				                <small class="form-text text-muted"> 
+				                Ingrese números sólos separados por punto decimal. Ejemplo 1234.05
+				                </small>
+				            </div>
+				    </div>
+
+				    <div class="form-group row">
+				        <div class="col-sm-8">
+				            <button type="submit" class="btn btn-primary">Actualizar</button>
+				        </div>
+				    </div>
+				</form>
+
 				</div>
 			</div>
 		</div>
@@ -16,8 +58,26 @@
 
 <script>
 	export default {
-		mounted() {
-			console.log('Component mounted.')
-		}
+
+		data(){
+			return{
+				gasto:{}
+			}
+		},
+		created(){
+			/*let uri = `http://vuelaravelcrud.test/api/post/edit/${this.$route.params.id}`;*/
+			let uri = 'http://www.gestor.com/api/gasto/edit/' + this.$route.params.id ;
+			axios.get(uri).then((responce) => {
+				this.gasto = responce.data;
+			});
+		},
+		methods: {
+        updateGasto() {
+          let uri = 'http://www.gestor.com/api/gasto/update/' + this.$route.params.id;
+          axios.post(uri, this.gasto).then((response) => {
+            this.$router.push({name: 'gastos'});
+          });
+        }
+      }
 	}
 </script>

@@ -27,9 +27,27 @@ class GastoController extends Controller
     }
 
     public function delete($id)
+
     {
         $gasto = Gasto::find($id);
         $gasto->delete();
         return response()->json('successfully deleted');
     }
+
+    public function edit($id)
+
+    {
+        $gasto = Gasto::find($id);
+        return response()->json($gasto);
+    }
+
+    public function update($id, Request $request )
+
+    {
+        $gasto = Gasto::find($id);
+        $gasto->update($request->all());
+        return response()->json('successfully updated');
+
+    }
+
 }

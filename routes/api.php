@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/gasto/create', 'GastoController@store');
 Route::get('/gastos', 'GastoController@index');
 Route::delete('/gasto/delete/{id}', 'GastoController@delete');
+Route::get('/gasto/edit/{id}', 'GastoController@edit');
+Route::post('/gasto/update/{id}', 'GastoController@update');
